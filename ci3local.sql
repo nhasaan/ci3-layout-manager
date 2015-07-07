@@ -1,0 +1,98 @@
+-- phpMyAdmin SQL Dump
+-- version 4.3.9
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Jul 02, 2015 at 09:33 AM
+-- Server version: 5.6.23
+-- PHP Version: 5.6.6
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `ci3local`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `abl_ci_sessions`
+--
+
+CREATE TABLE IF NOT EXISTS `abl_ci_sessions` (
+  `id` varchar(40) NOT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `timestamp` int(10) unsigned NOT NULL DEFAULT '0',
+  `data` blob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `abl_ci_sessions`
+--
+
+INSERT INTO `abl_ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('126cfda05f81d6c66148cdfc680753fd193e21e0', '127.0.0.1', 1435825378, 0x5f5f63695f6c6173745f726567656e65726174657c693a313433353832353038323b),
+('21b5eef1af491c65884543aaa12058ead51903d6', '127.0.0.1', 1435825826, 0x5f5f63695f6c6173745f726567656e65726174657c693a313433353832353832363b),
+('2d01950c84f799dc617b02bea110cae17a87b789', '127.0.0.1', 1435821827, 0x5f5f63695f6c6173745f726567656e65726174657c693a313433353832313631373b),
+('33e03c548b42a23ae272ec83e37fc1fc2c57dd9a', '127.0.0.1', 1435825756, 0x5f5f63695f6c6173745f726567656e65726174657c693a313433353832353437343b),
+('56a937210a1faa64517ea4c70b05d8fb93baa974', '127.0.0.1', 1435826062, 0x5f5f63695f6c6173745f726567656e65726174657c693a313433353832353832363b),
+('6216e51c5aafcad5578fd636534436abcbbcb2a6', '127.0.0.1', 1435823532, 0x5f5f63695f6c6173745f726567656e65726174657c693a313433353832333530323b),
+('75bf021fa18a0c8b9e4ac3939c45b9b7362ff8f0', '127.0.0.1', 1435822214, 0x5f5f63695f6c6173745f726567656e65726174657c693a313433353832323033303b),
+('84157bd6955016e324b222a9f39f29589d52e962', '127.0.0.1', 1435823140, 0x5f5f63695f6c6173745f726567656e65726174657c693a313433353832323939393b),
+('a0139f7b13b6d20d162b66e0d245b59347cce071', '127.0.0.1', 1435826298, 0x5f5f63695f6c6173745f726567656e65726174657c693a313433353832363230373b),
+('d407bdc892da6799bbcda0fff7640cbc3538646a', '127.0.0.1', 1435824730, 0x5f5f63695f6c6173745f726567656e65726174657c693a313433353832343433313b),
+('e17668fd93ef68aab0b68e3c29a88e965b8d3965', '127.0.0.1', 1435825826, 0x5f5f63695f6c6173745f726567656e65726174657c693a313433353832353832363b),
+('e65f450b9dca151ff571ade39309d97fa6730703', '127.0.0.1', 1435824846, 0x5f5f63695f6c6173745f726567656e65726174657c693a313433353832343734353b);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `abl_galleries`
+--
+
+CREATE TABLE IF NOT EXISTS `abl_galleries` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(128) NOT NULL,
+  `brief` text,
+  `thumb` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `is_active` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `abl_ci_sessions`
+--
+ALTER TABLE `abl_ci_sessions`
+  ADD PRIMARY KEY (`id`), ADD KEY `ci_sessions_timestamp` (`timestamp`);
+
+--
+-- Indexes for table `abl_galleries`
+--
+ALTER TABLE `abl_galleries`
+  ADD PRIMARY KEY (`id`), ADD KEY `user_id` (`user_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `abl_galleries`
+--
+ALTER TABLE `abl_galleries`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
