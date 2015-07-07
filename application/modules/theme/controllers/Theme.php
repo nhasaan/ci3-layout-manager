@@ -220,6 +220,8 @@ class Theme extends MX_Controller {
 	    if (isset($css) && count($css) > 0) {
 	    	$cssAssetsHeader = array();
 	    	$cssAssetsFooter = array();
+	    	$footerCssAssetsNonCached = array();
+	    	$headerCssAssetsNonCached = array();
 
 	    	foreach ($css as $key => $val) {
 	    		if ( isset($css[$key]['is_cached']) && $css[$key]['is_cached'] == TRUE ) {
@@ -231,20 +233,35 @@ class Theme extends MX_Controller {
 		    		
 		    	} else {
 		    		if ( isset($css[$key]['in_footer']) && $css[$key]['in_footer'] == TRUE ) {
-		    			$footer_assets .= $this->css_asset($css[$key]['url']);
+		    			$footerCssAssetsNonCached[] = $css[$key]['url'];
 		    		} else {
-		    			$header_assets .= $this->css_asset($css[$key]['url']);
+		    			$headerCssAssetsNonCached[] = $css[$key]['url'];
 		    		}
 		    	}
 	    	}
 
 	    	$header_assets .= $this->css_asset($cssAssetsHeader);
 	    	$footer_assets .= $this->css_asset($cssAssetsFooter);
+
+	    	if (isset($headerCssAssetsNonCached) && count($headerCssAssetsNonCached) > 0) {
+	    		foreach ($headerCssAssetsNonCached as $css) {
+	    			$header_assets .= $this->css_asset($css);
+	    		}
+	    	}
+
+	    	if (isset($footerCssAssetsNonCached) && count($footerCssAssetsNonCached) > 0) {
+	    		foreach ($footerCssAssetsNonCached as $css) {
+	    			$footer_assets .= $this->css_asset($css);
+	    		}
+	    	}
 	    }
 
 	    if (isset($js) && count($js) > 0) {
 	    	$jsAssetsHeader = array();
 	    	$jsAssetsFooter = array();
+	    	$headerJsAssetsNonCached = array();
+	    	$footerJsAssetsNonCached = array();
+
 	    	foreach ($js as $key => $val) {
 	    		if ( isset($js[$key]['is_cached']) && $js[$key]['is_cached'] == TRUE ) {
 		    		if ( isset($js[$key]['in_footer']) && $js[$key]['in_footer'] == FALSE ) {
@@ -255,15 +272,27 @@ class Theme extends MX_Controller {
 		    		
 		    	} else {
 		    		if ( isset($js[$key]['in_footer']) && $js[$key]['in_footer'] == FALSE ) {
-		    			$header_assets .= $this->js_asset($js[$key]['url']);
+		    			$headerJsAssetsNonCached[] = $js[$key]['url'];
 		    		} else {
-		    			$footer_assets .= $this->js_asset($js[$key]['url']);
+		    			$footerJsAssetsNonCached[] = $js[$key]['url'];
 		    		}
 		    	}
 	    	}
 
 	    	$header_assets .= $this->js_asset($jsAssetsHeader);
 	    	$footer_assets .= $this->js_asset($jsAssetsFooter);
+
+	    	if (isset($headerJsAssetsNonCached) && count($headerJsAssetsNonCached) > 0) {
+	    		foreach ($headerJsAssetsNonCached as $js) {
+	    			$header_assets .= $this->js_asset($js);
+	    		}
+	    	}
+
+	    	if (isset($footerJsAssetsNonCached) && count($footerJsAssetsNonCached) > 0) {
+	    		foreach ($footerJsAssetsNonCached as $js) {
+	    			$footer_assets .= $this->js_asset($js);
+	    		}
+	    	}
 	    }
 
 	    // set the header and footer assets
